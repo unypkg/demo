@@ -54,6 +54,18 @@ EOFUNY
 sudo -i -u uny bash <<"EOFUNY"
 set -vx
 
+set +h
+umask 022
+UNY=/uny
+LC_ALL=POSIX
+UNY_TGT=$(uname -m)-uny-linux-gnu
+PATH=/usr/bin
+if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
+PATH=$UNY/tools/bin:$PATH
+CONFIG_SITE=$UNY/usr/share/config.site
+export UNY LC_ALL UNY_TGT PATH CONFIG_SITE
+MAKEFLAGS="-j$(nproc)"
+
 echo $HOME
 echo $TERM
 echo $PS1

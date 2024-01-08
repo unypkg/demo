@@ -45,6 +45,7 @@ PATH=$UNY/tools/bin:$PATH
 CONFIG_SITE=$UNY/usr/share/config.site
 export UNY LC_ALL UNY_TGT PATH CONFIG_SITE
 MAKEFLAGS="-j$(nproc)"
+EOF
 EOFUNY
 
 sudo -i -u uny bash <<"EOFUNY"

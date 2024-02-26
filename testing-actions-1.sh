@@ -7,7 +7,7 @@ fi
 
 apt update && apt install -y gcc g++ gperf bison flex texinfo help2man make libncurses5-dev \
     python3-dev autoconf automake libtool libtool-bin gawk curl bzip2 xz-utils unzip \
-    patch libstdc++6 rsync gh git meson ninja-build
+    patch libstdc++6 rsync gh git meson ninja-build autopoint
 
 ### Getting Variables from files
 UNY_AUTO_PAT="$(cat UNY_AUTO_PAT)"
@@ -148,7 +148,7 @@ archiving_source
 gh -R unypkg/demo release create "$pkgname"-"$latest_ver"-"$uny_build_date_now" --generate-notes \
     "$pkgname-$latest_ver".tar.xz
 
-cd "$pkg_git_repo_dir" || exit
+cd "$pkgname-$latest_ver" || exit
 
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
     --libdir=/usr/lib \

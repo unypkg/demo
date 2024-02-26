@@ -21,6 +21,20 @@ ln -fs /bin/bash /bin/sh
 
 export UNY=/uny
 
+### Setup Git and GitHub
+# Setup Git User -
+git config --global user.name "uny-auto"
+git config --global user.email "uny-auto@unyqly.com"
+git config --global credential.helper store
+git config --global advice.detachedHead false
+
+git credential approve <<EOF
+protocol=https
+url=https://github.com
+username=uny-auto
+password="$UNY_AUTO_PAT"
+EOF
+
 echo "Testing for /usr/bin/env"
 type env
 ls -lh /usr/bin/env
@@ -152,19 +166,22 @@ version_details
 tar xf "$pkgname-$latest_ver".tar.xz
 cd "$pkgname-$latest_ver" || exit
 
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
-    --libdir=/usr/lib \
-    --docdir=/usr/share/doc/util-linux \
-    --disable-chfn-chsh \
-    --disable-login \
-    --disable-nologin \
-    --disable-su \
-    --disable-setpriv \
-    --disable-runuser \
-    --disable-pylibmount \
-    --disable-static \
-    --without-python \
-    runstatedir=/run
+#./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
+#    --libdir=/usr/lib \
+#    --docdir=/usr/share/doc/util-linux \
+#    --disable-chfn-chsh \
+#    --disable-login \
+#    --disable-nologin \
+#    --disable-su \
+#    --disable-setpriv \
+#    --disable-runuser \
+#    --disable-pylibmount \
+#    --disable-static \
+#    --without-python \
+#    runstatedir=/run
+#
+#make -j"$(nproc)"
+#make install
 
-make -j"$(nproc)"
-make install
+cd $UNY/sources || exit
+echo "blabla from script 1" >blabla

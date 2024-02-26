@@ -15,7 +15,11 @@ jobs:
         run: |
           echo "$UNY_AUTO_PAT" >UNY_AUTO_PAT
           echo "$GH_TOKEN" >GH_TOKEN
-      - name: Run the script
+      - name: Run step 1
         run: |
           chmod +x testing-actions-1.sh
           sudo ./testing-actions-1.sh
+        - name: Run step 2
+        run: |
+          chmod +x teststep2.sh
+          sudo ./teststep2.sh

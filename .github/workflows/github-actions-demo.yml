@@ -7,7 +7,7 @@ env:
   GH_TOKEN: ${{ secrets.UNY_AUTO_PAT }}
 
 jobs:
-  build-unypkg-system:
+  job-1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,11 +15,19 @@ jobs:
         run: |
           echo "$UNY_AUTO_PAT" >UNY_AUTO_PAT
           echo "$GH_TOKEN" >GH_TOKEN
-      - name: Run step 1
+      - name: Run job 1
         run: |
           chmod +x testing-actions-1.sh
           sudo ./testing-actions-1.sh
-      - name: Run step 2
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Save variables to files
+        run: |
+          echo "$UNY_AUTO_PAT" >UNY_AUTO_PAT
+          echo "$GH_TOKEN" >GH_TOKEN
+      - name: Run job 2
         run: |
           chmod +x teststep2.sh
           sudo ./teststep2.sh

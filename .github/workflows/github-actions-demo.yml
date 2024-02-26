@@ -20,6 +20,7 @@ jobs:
           chmod +x testing-actions-1.sh
           sudo ./testing-actions-1.sh
   job-2:
+    needs: job-1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

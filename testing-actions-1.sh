@@ -137,19 +137,19 @@ latest_head="$(git ls-remote --refs --tags --sort="v:refname" $pkggit | grep -E 
 latest_ver="$(echo "$latest_head" | cut --delimiter='/' --fields=3 | sed "s|v||")"
 latest_commit_id="$(echo "$latest_head" | cut --fields=1)"
 
-check_for_repo_and_create
-git_clone_source_repo
+# shellcheck disable=SC2001
+latest_ver_front="$(echo "$latest_ver" | sed "s|[.][0-9]*$||")"
 
-cd "$pkg_git_repo_dir" || exit
-./autogen.sh
-cd /uny/sources || exit
+check_for_repo_and_create
+
+wget https://www.kernel.org/pub/linux/utils/util-linux/v"$latest_ver_front"/util-linux-"$latest_ver".tar.xz
 
 version_details
-archiving_source
 
-gh -R unypkg/demo release create "$pkgname"-"$latest_ver"-"$uny_build_date_now" --generate-notes \
-    "$pkgname-$latest_ver".tar.xz
+#gh -R unypkg/demo release create "$pkgname"-"$latest_ver"-"$uny_build_date_now" --generate-notes \
+#    "$pkgname-$latest_ver".tar.xz
 
+tar xf "$pkgname-$latest_ver".tar.xz
 cd "$pkgname-$latest_ver" || exit
 
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \

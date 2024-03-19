@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+pwd
+
 if [[ $EUID -gt 0 ]]; then
     echo "Not root, exiting..."
     exit

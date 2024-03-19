@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
-pwd
+workdir="$(pwd)"
+ls "$workdir"
 
 if [[ $EUID -gt 0 ]]; then
     echo "Not root, exiting..."

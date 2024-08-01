@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 workdir="$(pwd)"
+echo "$workdir"
 ls "$workdir"
 
 if [[ $EUID -gt 0 ]]; then
